@@ -5,7 +5,8 @@ Ersetzt die klassische `modbus:`-YAML-Konfiguration durch Config Flow, echte Ent
 und eine geteilte Modbus-Verbindung (`homeassistant.components.modbus`, HA 2026.9+
 "Modernizing Modbus") statt eigenem Socket.
 
-Nutzt [`kermi-modbus`](../kermi-modbus) als Device Library (reines Python, kein HA-Bezug) und
+Nutzt [`kermi-modbus`](https://pypi.org/project/kermi-modbus/) als Device Library (reines
+Python, kein HA-Bezug) und
 [`modbus-connection`](https://home-assistant-libs.github.io/modbus-connection/) als
 Verbindungs-Framework.
 
