@@ -9,3 +9,5 @@
 homeassistant==2026.9.1
 pytest-homeassistant-custom-component
 pymodbus>=3.7  # homeassistant.components.modbus's own dependency; needed at import time
+modbus-connection[tmodbus]  # homeassistant.components.modbus imports modbus_connection.tmodbus
+                             # unconditionally, which needs the "tmodbus" extra (pulls in serialx)
