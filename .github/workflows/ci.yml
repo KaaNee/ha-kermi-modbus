@@ -21,7 +21,7 @@ jobs:
           path: kermi-modbus
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.14"
       - working-directory: ha-kermi-modbus
         run: pip install -r requirements_test.txt -r requirements_dev.txt
       - working-directory: ha-kermi-modbus
