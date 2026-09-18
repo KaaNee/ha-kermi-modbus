@@ -1,5 +1,7 @@
 # Kermi (Modbus): Home Assistant Custom Component
 
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=KaaNee&repository=ha-kermi-modbus&category=integration)
+
 HACS-Integration für Kermi-Wärmepumpen (x-center / x-change dynamic pro) über Modbus/TCP.
 Ersetzt die klassische `modbus:`-YAML-Konfiguration durch Config Flow, echte Entities/Devices
 und eine geteilte Modbus-Verbindung (`homeassistant.components.modbus`, HA 2026.9+
@@ -22,7 +24,7 @@ Verbindungs-Framework.
 `kermi-modbus==0.0.1`-Requirement installiert sich automatisch, sobald HA die Integration lädt.
 Kein manueller Schritt nötig.
 
-Als HACS Custom Repository (`Integration`, dieses Verzeichnis) hinzufügen, oder
+Über den Button oben als HACS Custom Repository hinzufügen (Kategorie „Integration"), oder
 `custom_components/kermi_modbus/` manuell nach `<config>/custom_components/` kopieren.
 
 In HA: Einstellungen → Geräte & Dienste → Integration hinzufügen → „Kermi (Modbus)".
