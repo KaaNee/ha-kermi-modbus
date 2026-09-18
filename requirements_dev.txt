@@ -1,0 +1,3 @@
+# Linting only. Test dependencies (which also pull in Home Assistant itself)
+# live in requirements_test.txt.
+ruff

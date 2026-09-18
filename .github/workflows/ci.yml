@@ -1,0 +1,30 @@
+# Checks out this repo and its kermi-modbus dependency as sibling directories
+# (requirements_test.txt references it via "-e ../kermi-modbus"), matching
+# local dev layout.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: ha-kermi-modbus
+      - uses: actions/checkout@v4
+        with:
+          repository: KaaNee/kermi-modbus
+          path: kermi-modbus
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - working-directory: ha-kermi-modbus
+        run: pip install -r requirements_test.txt -r requirements_dev.txt
+      - working-directory: ha-kermi-modbus
+        run: ruff check .
+      - working-directory: ha-kermi-modbus
+        run: pytest

@@ -1,0 +1,11 @@
+# Test dependencies. Install with: pip install -r requirements_test.txt
+#
+# kermi-modbus is installed editable from a sibling directory for local dev (live
+# changes without reinstalling), even though it's published on PyPI. Clone it next
+# to this repo:
+#   git clone https://github.com/KaaNee/kermi-modbus.git ../kermi-modbus
+-e ../kermi-modbus
+
+homeassistant==2026.9.1
+pytest-homeassistant-custom-component
+pymodbus>=3.7  # homeassistant.components.modbus's own dependency; needed at import time

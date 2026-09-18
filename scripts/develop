@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Run a real Home Assistant instance with this integration loaded, config in
+# ./config/ (gitignored). First run creates a minimal configuration.yaml
+# with debug logging for this integration turned on.
+#
+# Deliberately NOT `default_config:` — confirmed against real hardware
+# (2026-09-14) that it pulls in zeroconf/ssdp/dhcp/bluetooth/usb discovery,
+# which actively scans the LAN this dev machine sits on and registers real
+# devices it finds there (e.g. a Chromecast) as entities in this throwaway
+# instance. This integration only needs frontend/config/onboarding to be
+# set up and tested through the UI.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+mkdir -p config
+ln -sfn "$(pwd)/custom_components" config/custom_components
+
+if [ ! -f config/configuration.yaml ]; then
+  cat > config/configuration.yaml <<'EOF'
+http:
+frontend:
+config:
+onboarding:
+
+logger:
+  default: warning
+  logs:
+    custom_components.kermi_modbus: debug
+EOF
+fi
+
+hass -c config

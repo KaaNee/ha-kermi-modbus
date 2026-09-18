@@ -1,0 +1,202 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "description": "Connect to your Kermi x-center's Modbus/TCP interface. The heating-circuit and DHW storage-module units are optional and independent (project plan §10.1) — leave either blank if your installation doesn't have it.",
+        "data": {
+          "host": "Host",
+          "port": "Port",
+          "xcenter_unit": "x-center unit ID",
+          "heating_circuit_unit": "Heating-circuit unit ID",
+          "dhw_unit": "DHW unit ID"
+        },
+        "data_description": {
+          "host": "IP address or hostname of the Kermi Modbus TCP gateway.",
+          "port": "Modbus TCP port (usually 502).",
+          "xcenter_unit": "Modbus unit/slave ID of the x-center controller (usually 40).",
+          "heating_circuit_unit": "Modbus unit/slave ID of the heating-circuit storage module (usually 50). Leave blank if not present.",
+          "dhw_unit": "Modbus unit/slave ID of the DHW storage module (usually 51). Leave blank if not present."
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach one of the configured units. Check host/port and the unit IDs."
+    },
+    "abort": {
+      "already_configured": "This device is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "data": {
+          "pv_enabled": "Enable PV-modulation entities",
+          "update_interval_seconds": "Poll interval (seconds)"
+        },
+        "data_description": {
+          "pv_enabled": "Adds the PV-surplus power sensor (addresses 300-303). Off by default — the x-center is polling-sensitive (project plan §8).",
+          "update_interval_seconds": "How often to poll the device. Minimum 10s; default 30s is deliberately conservative for a polling-sensitive device reading up to three units per cycle."
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "exit_temperature": { "name": "Heat-source exit temperature" },
+      "incoming_temperature": { "name": "Heat-source incoming temperature" },
+      "outside_temperature": { "name": "Outside temperature" },
+      "flow_temperature": { "name": "Flow temperature" },
+      "return_temperature": { "name": "Return temperature" },
+      "flow_speed": { "name": "Flow speed" },
+      "cop": { "name": "COP" },
+      "cop_heating": { "name": "COP heating" },
+      "cop_dhw": { "name": "COP DHW" },
+      "cop_cooling": { "name": "COP cooling" },
+      "thermal_power": { "name": "Thermal power" },
+      "thermal_power_heating": { "name": "Thermal power heating" },
+      "thermal_power_dhw": { "name": "Thermal power DHW" },
+      "thermal_power_cooling": { "name": "Thermal power cooling" },
+      "electric_power": { "name": "Electric power" },
+      "electric_power_heating": { "name": "Electric power heating" },
+      "electric_power_dhw": { "name": "Electric power DHW" },
+      "electric_power_cooling": { "name": "Electric power cooling" },
+      "compressor_work_hours": { "name": "Compressor work hours" },
+      "fan_work_hours": { "name": "Fan work hours" },
+      "storage_loading_pump_work_hours": { "name": "Storage loading pump work hours" },
+      "global_state": {
+        "name": "Global state",
+        "state": {
+          "standby": "Standby",
+          "alarm": "Alarm",
+          "dhw": "DHW",
+          "cooling": "Cooling",
+          "heating": "Heating",
+          "defrost": "Defrost",
+          "preparing": "Preparing",
+          "blocked": "Blocked",
+          "evu_blocktime": "Utility block time",
+          "unavailable": "Unavailable"
+        }
+      },
+      "pv_modulation_power": { "name": "PV-surplus power" },
+      "buffer_actual_temperature": { "name": "Buffer actual temperature" },
+      "buffer_target_temperature": { "name": "Buffer target temperature" },
+      "cooling_buffer_actual_temperature": { "name": "Cooling buffer actual temperature" },
+      "cooling_buffer_target_temperature": { "name": "Cooling buffer target temperature" },
+      "heating_circuit_status": {
+        "name": "Heating circuit status",
+        "state": {
+          "off": "Off",
+          "heating": "Heating",
+          "cooling": "Cooling",
+          "dew_point": "Dew point monitoring",
+          "pump_maintenance_run": "Pump maintenance run",
+          "frost_protection": "Frost protection",
+          "manual_operation": "Manual operation",
+          "test_mode": "Test mode",
+          "initializing": "Initializing",
+          "safety_state": "Safety state"
+        }
+      },
+      "heating_circuit_actual_temperature": { "name": "Heating circuit actual temperature" },
+      "heating_circuit_target_temperature": { "name": "Heating circuit target temperature" },
+      "operating_mode": {
+        "name": "Operating mode",
+        "state": {
+          "off": "Off",
+          "heating": "Heating",
+          "cooling": "Cooling"
+        }
+      },
+      "external_heat_generator_status": {
+        "name": "External heat generator status",
+        "state": {
+          "no_request": "No request",
+          "request": "Request",
+          "ready_auto_parallel": "Ready, auto, parallel",
+          "ready_auto_alternative": "Ready, auto, alternative",
+          "ready_auto_partial_parallel_parallel": "Ready, auto, partial parallel (parallel)",
+          "ready_auto_partial_parallel_alternative": "Ready, auto, partial parallel (alternative)",
+          "ready_due_to_fault": "Ready, due to fault",
+          "ready_manual_parallel": "Ready, manual, parallel",
+          "ready_due_to_manual_parallel": "Ready, due to manual parallel",
+          "ready_evu_blocktime": "Ready, utility block time",
+          "ready_external_request": "Ready, external request",
+          "ready_external_request_comfort": "Ready, external request (comfort)",
+          "request_auto_parallel": "Requested, auto, parallel",
+          "request_auto_alternative": "Requested, auto, alternative",
+          "request_auto_partial_parallel_parallel": "Requested, auto, partial parallel (parallel)",
+          "request_auto_partial_parallel_alternative": "Requested, auto, partial parallel (alternative)",
+          "request_due_to_fault": "Requested, due to fault",
+          "request_manual_parallel": "Requested, manual, parallel",
+          "request_due_to_manual_parallel": "Requested, due to manual parallel",
+          "request_evu_blocktime": "Requested, utility block time",
+          "request_external_request": "Requested, external request",
+          "request_external_request_comfort": "Requested, external request (comfort)"
+        }
+      },
+      "probe": { "name": "Probe {index}" },
+      "outside_temperature_averaged": { "name": "Outside temperature (averaged)" },
+      "heating_circuit_pump_work_hours": { "name": "Heating circuit pump work hours" },
+      "heating_rod_work_hours": { "name": "Heating rod work hours" },
+      "dhw_actual_temperature": { "name": "DHW actual temperature" },
+      "dhw_target_temperature": { "name": "DHW target temperature" }
+    },
+    "binary_sensor": {
+      "alarm_active": { "name": "Alarm" },
+      "summer_mode_active": { "name": "Summer mode active" },
+      "cooling_mode_active": { "name": "Cooling mode active" }
+    },
+    "number": {
+      "dhw_constant_setpoint": { "name": "DHW constant setpoint" },
+      "dhw_single_charge_setpoint": { "name": "DHW single-charge setpoint" },
+      "heating_curve_parallel_shift": { "name": "Heating curve parallel shift" },
+      "summer_mode_off_threshold": { "name": "Summer mode off threshold" },
+      "winter_mode_on_threshold": { "name": "Winter mode on threshold" },
+      "cooling_mode_on_threshold": { "name": "Cooling mode on threshold" },
+      "cooling_mode_off_threshold": { "name": "Cooling mode off threshold" },
+      "pv_target_temperature_heating": { "name": "PV target temperature heating" },
+      "pv_target_temperature_dhw": { "name": "PV target temperature DHW" }
+    },
+    "select": {
+      "operating_type_select": {
+        "name": "Operating type",
+        "state": {
+          "auto": "Auto",
+          "off": "Off"
+        }
+      },
+      "energy_mode_select": {
+        "name": "Energy mode",
+        "state": {
+          "off": "Off",
+          "eco": "Eco",
+          "normal": "Normal",
+          "comfort": "Comfort",
+          "custom": "Custom"
+        }
+      },
+      "manual_season_selection_select": {
+        "name": "Manual season selection",
+        "state": {
+          "auto": "Auto",
+          "heating": "Heating",
+          "cooling": "Cooling",
+          "off": "Off"
+        }
+      },
+      "external_heat_generator_mode_select": {
+        "name": "External heat generator mode",
+        "state": {
+          "auto": "Auto",
+          "heat_pump_only": "Heat pump only",
+          "both": "Both",
+          "secondary_heat_generator_only": "Secondary heat generator only"
+        }
+      }
+    },
+    "switch": {
+      "dhw_single_charge": { "name": "DHW single charge" }
+    }
+  }
+}

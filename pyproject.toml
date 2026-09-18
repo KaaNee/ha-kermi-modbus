@@ -1,0 +1,36 @@
+# No [build-system]/[project] on purpose: custom_components/ is loaded
+# directly by Home Assistant (or copied in by HACS), never pip-installed as
+# a package. This file only configures pytest/ruff for local development.
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+    "D203",   # one-blank-line-before-class vs. D211 — mutually exclusive, pick D211
+    "D212",   # multi-line-summary-first-line vs. D213 — pick D213
+    "COM812", # trailing comma — formatter's job, conflicts with `ruff format`
+    "ISC001", # implicit string concat — formatter's job, same conflict
+    "TD002", "TD003", # TODO author/issue-link — overkill for a two-file project
+    "FIX002", # "line contains TODO" — TODOs are fine, tracked in README instead
+    "CPY001", # copyright header — not a convention this project follows
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = [
+    "S101",    # assert is the point of a test
+    "SLF001",  # tests reach into private attributes on purpose
+    "PLR2004", # magic values (register values, expected states) are fine in tests
+    "ANN",     # full type annotations on test helpers/fixtures aren't worth it
+    "TC001", "TC002", "TC003", # tests import for direct use, not just typing
+    "TRY003", "EM101", # short inline exception messages are fine in test doubles
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

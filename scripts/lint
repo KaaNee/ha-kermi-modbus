@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Format and lint, applying every safe autofix.
+set -euo pipefail
+cd "$(dirname "$0")/.."
+
+ruff format .
+ruff check . --fix
