@@ -2,12 +2,12 @@
 
 Unlike ``e3dc_modbus`` (one device per config entry), a Kermi installation is
 1-3 devices sharing one config entry: the x-center always, plus whichever of
-the heating-circuit/DHW storage modules were configured (project plan §10.1
-— these are confirmed functionally separate physical modules, not one device
-answering twice). Every entity picks its device via ``device_key``
-(``const.DEVICE_KEY_*``); the heating-circuit/DHW devices are linked to the
-x-center via ``via_device``, see ``__init__.py`` where the DeviceInfo objects
-are built.
+the heating-circuit/DHW storage modules were configured (these are confirmed
+functionally separate physical modules, not one device answering twice).
+Every entity picks its device via ``device_key`` (``const.DEVICE_KEY_*``);
+the heating-circuit/DHW devices are linked to the x-center via
+``via_device_id``, see ``__init__.py`` where the DeviceInfo objects are
+built.
 """
 
 from __future__ import annotations

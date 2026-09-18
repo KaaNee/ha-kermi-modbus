@@ -97,7 +97,7 @@ zweifelhaften Gewinn.
 
 - Drei Unit-Typen statt einem (anders als `e3dc_modbus`): x-center (Pflicht) sowie Heizkreis-
   und TWE-Speichersystemmodul (je optional, unabhängig, funktional getrennt). Bis zu drei
-  HA-Devices pro Config Entry, Speichermodule über `via_device` an das x-center gebunden.
+  HA-Devices pro Config Entry, Speichermodule über `via_device_id` an das x-center gebunden.
 - Kein `async_probe()`: Kermi dokumentiert kein Modell-/Seriennummer-Register (siehe
   `kermi-modbus`s `models/_base.py`). `unique_id` ist deshalb `host_port_xcenter-unit`, nicht
   eine Seriennummer. Geräte-Identität bleibt stabil, solange sich diese drei nicht ändern.
@@ -141,9 +141,6 @@ nicht direkt über die Entity-Methoden.
 
 ## Bekannte Einschränkungen
 
-- Die Home-Assistant-eigene Warnung „calls `device_registry.async_get_or_create` with a
-  deprecated `via_device` parameter" (läuft bis HA 2027.8.0) betrifft alle Plattformen mit
-  einem Heizkreis-/TWE-Gerät, noch nicht auf `via_device_id` migriert.
 - Nur x-change dynamic pro real getestet. Bösch-Sub-Marke laut eigenem openHAB-Binding "nearly
   identically", aber unverifiziert.
 - Kaskade (Slave 41/42) nicht implementiert, kein Testgerät vorhanden.
