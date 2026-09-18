@@ -167,10 +167,6 @@ nicht direkt über die Entity-Methoden.
   (`Invalid register count: expected 3, got 2`), was die Einrichtung fehlschlagen ließ. Fix:
   ein domänenspezifisches Einzelregister pro Unit (200/150/100). Nur im Mock-Test nicht
   aufgefallen, weil der Mock jede angeforderte Registeranzahl anstandslos beantwortet.
-- Diese Kopie hier lebt im `ha-kermi`-Monorepo, wo `.github/workflows/ci.yml` und
-  `validate.yml` inert sind (Gitea/GitHub scannen nur den Repo-Root). Die eigentliche CI läuft
-  im gesplitteten Standalone-Repo [KaaNee/ha-kermi-modbus](https://github.com/KaaNee/ha-kermi-modbus)
-  (seit 2026-09-18), dort grün.
 - Nur x-change dynamic pro real getestet. Bösch-Sub-Marke laut eigenem openHAB-Binding "nearly
   identically", aber unverifiziert (siehe Projektplan §12/§13).
 - Kaskade (Slave 41/42) nicht implementiert, kein Testgerät vorhanden.
